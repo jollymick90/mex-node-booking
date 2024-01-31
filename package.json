@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src\\main.ts",
     "start": "set NODE_ENV=development && nodemon --exec ts-node src\\main.ts",
+    "typeorm": "ts-node -r ./fix-module-alias.js typeorm",
     "build": "tsc"
   },
   "repository": {
@@ -20,18 +21,31 @@
   },
   "homepage": "https://github.com/jollymick90/mex-node-booking#readme",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/pg": "^8.11.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
-    "typeorm": "^0.3.20"
+    "routing-controllers": "^0.10.4",
+    "typedi": "^0.10.0",
+    "typeorm": "^0.3.20",
+    "typeorm-simple-query-parser": "^1.0.17",
+    "typeorm-typedi-extensions": "^0.4.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.13",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "_moduleAliases": {
+    "@base": "src",
+    "@api": "src/api"
   }
 }
