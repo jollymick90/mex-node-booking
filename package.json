@@ -26,6 +26,7 @@
     "@types/pg": "^8.11.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "event-dispatch": "^0.4.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
@@ -33,9 +34,7 @@
     "reflect-metadata": "^0.2.1",
     "routing-controllers": "^0.10.4",
     "typedi": "^0.10.0",
-    "typeorm": "^0.3.20",
-    "typeorm-simple-query-parser": "^1.0.17",
-    "typeorm-typedi-extensions": "^0.4.1"
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

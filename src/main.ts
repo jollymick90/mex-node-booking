@@ -1,5 +1,5 @@
 import 'module-alias/register';
-
+import 'reflect-metadata';
 import express from 'express';
 import {
   useContainer as routingControllersUseContainer,
@@ -9,6 +9,7 @@ import Container from 'typedi';
 
 import { appConfig } from './config/app';
 import { AppDataSource } from './config/db';
+import { UserRepository } from './api/repositories/Users/UserRepository';
 
 class App {
 private app: express.Application = express();
@@ -28,6 +29,8 @@ private app: express.Application = express();
   }
   private async typeOrmCreateConnection() {
     try {
+      // Container.set(DataSource, AppDataSource);
+      // const AppDataSource = Container.get("AppDataSource");
       await AppDataSource.initialize();
     } catch (error) {
       console.log('Caught! Cannot connect to database: ', error);
@@ -58,6 +61,7 @@ private app: express.Application = express();
   }
   private useContainers() {
     routingControllersUseContainer(Container);
+    Container.set('UserRepository', UserRepository);
     // typeormOrmUseContainer(containerTypeorm);
 
   }

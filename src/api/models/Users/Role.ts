@@ -13,4 +13,6 @@ export class Role extends EntityBase {
 
   @Column()
   name: string;
+  @Column()
+  code: string;
 }

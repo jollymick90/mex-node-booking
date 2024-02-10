@@ -22,30 +22,25 @@ export class User extends EntityBase {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
-  first_name: string;
-
-  @Column()
-  last_name: string;
-
-  @Column()
+  @Column({ name: "email" })
   email: string;
 
-  @Column()
+  @Column({ name: "name" })
+  name: string;
+
+  @Column({ name: "telephone" })
+  telephone: string;
+
+  @Column({ name: "password" })
   @Exclude()
   password: string;
 
-  @Column()
-  role_id: number;
+  @Column({ name: "role_id" })
+  roleId: number;
 
   @OneToOne(() => Role)
   @JoinColumn({ name: 'role_id' })
   role: Role;
-
-  @Expose({ name: 'full_name' })
-  get fullName() {
-    return this.first_name + ' ' + this.last_name;
-  }
 
   @BeforeInsert()
   @BeforeUpdate()
@@ -55,8 +50,8 @@ export class User extends EntityBase {
 
   @BeforeInsert()
   async setDefaultRole() {
-    const roleId = this.role_id ? this.role_id : 2;
+    const roleId = this.roleId ? this.roleId : 1;
 
-    this.role_id = roleId;
+    this.roleId = roleId;
   }
 }

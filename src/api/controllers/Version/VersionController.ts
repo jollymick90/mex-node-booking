@@ -15,6 +15,6 @@ import { ControllerBase } from '@base/infrastructure/abstracts/ControllerBase';
 
     @Get()
     public async getTest() {
-      return "hello";
+      return "0.0.1";
     }
   }

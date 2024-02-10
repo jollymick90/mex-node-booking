@@ -1,6 +1,7 @@
 import { Role } from '@base/entities/Role';
 import { User } from '@base/entities/User';
 import { env } from '@base/utils/env';
+import Container from 'typedi';
 import { DataSource } from 'typeorm';
 
 const dbConfig = {
@@ -25,7 +26,8 @@ export const AppDataSource = new DataSource({
     database: dbConfig.dbDatabase,
     synchronize: false,
     logging: true,
-    entities: [User, Role],
+    entities: [dbConfig.dbEntities],
     // subscribers: [],
     // migrations: [],
 })
+// Container.set(DataSource, AppDataSource)
