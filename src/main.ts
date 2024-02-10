@@ -2,11 +2,14 @@ import 'module-alias/register';
 import 'reflect-metadata';
 import * as swaggerUiExpress from 'swagger-ui-express';
 import express from 'express';
+import bodyParser from 'body-parser';
 import {
   useContainer as routingControllersUseContainer,
   useExpressServer,
   getMetadataArgsStorage
 } from 'routing-controllers';
+// import { useSocketServer, useContainer as socketUseContainer } from 'socket-controllers';
+
 import Container from 'typedi';
 
 import { appConfig } from './config/app';
@@ -14,23 +17,40 @@ import { AppDataSource } from './config/db';
 import { UserRepository } from './api/repositories/Users/UserRepository';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { MexLogger } from './utils/logger';
+import { loadEventDispatcher } from './utils/load-event-dispatcher';
+import { loadHelmet } from './utils/load-helmet';
+import { CustomErrorHandler } from './infrastructure/middlewares/Application/CustomErrorHandler';
+import { AuthCheck } from './infrastructure/middlewares/Auth/AuthCheck';
+import { HasRole } from './infrastructure/middlewares/Auth/HasRole';
 
 class App {
-private app: express.Application = express();
+  private app: express.Application = express();
   private port: Number = appConfig.port;
 
-  constructor () {
-    
+  constructor() {
+
     this.bootstrap();
   }
   async bootstrap() {
     this.useContainers();
     await this.typeOrmCreateConnection();
+    await this.registerEvents();
+    this.setupMiddlewares();
     this.registerSocketControllers();
-    this.registerDefaultHomePage();
     this.registerRoutingControllers();
+    this.registerDefaultHomePage();
     this.setupSwagger();
 
+  }
+  private registerEvents() {
+    return loadEventDispatcher();
+  }
+
+  private setupMiddlewares() {
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.json());
+    loadHelmet(this.app);
   }
   private async typeOrmCreateConnection() {
     try {
@@ -38,20 +58,25 @@ private app: express.Application = express();
       // const AppDataSource = Container.get("AppDataSource");
       await AppDataSource.initialize();
     } catch (error) {
-      console.log('Caught! Cannot connect to database: ', error);
+      MexLogger.error('Caught! Cannot connect to database: ', error);
     }
   }
   private registerSocketControllers() {
     const server = require('http').Server(this.app);
-    // const io = require('socket.io')(server);
+    const io = require('socket.io')(server);
 
-    // this.app.use(function (req: any, res: any, next) {
-    //   req.io = io;
-    //   next();
+    this.app.use(function (req: any, res: any, next) {
+      req.io = io;
+      next();
+    });
+
+    server.listen(this.port,
+      () => console.log(`🚀 Server started at http://localhost:${this.port}\n🚨️ Environment: ${process.env.NODE_ENV}`)
+    );
+
+    // useSocketServer(io, {
+    //   controllers: [__dirname + appConfig.controllersDir],
     // });
-
-    server.listen(this.port, () => console.log(`🚀 Server started at http://localhost:${this.port}\n🚨️ Environment: ${process.env.NODE_ENV}`));
-    
   }
   private registerRoutingControllers() {
     useExpressServer(this.app, {
@@ -60,8 +85,9 @@ private app: express.Application = express();
       classTransformer: true,
       defaultErrorHandler: false,
       routePrefix: appConfig.routePrefix,
-      controllers: [__dirname + appConfig.controllersDir]
-      // middlewares: [__dirname + appConfig.middlewaresDir],
+      controllers: [__dirname + appConfig.controllersDir],
+      middlewares: [CustomErrorHandler, AuthCheck],
+
     });
   }
   private useContainers() {

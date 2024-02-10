@@ -1,6 +1,7 @@
 import { Role } from '@base/entities/Role';
 import { User } from '@base/entities/User';
 import { env } from '@base/utils/env';
+import { MexLogger } from '@base/utils/logger';
 import Container from 'typedi';
 import { DataSource } from 'typeorm';
 
@@ -15,7 +16,7 @@ const dbConfig = {
   dbSchema: env('TYPEORM_SCHEMA'),
   allowLogging: env('TYPEORM_LOGGING'),
 };
-console.log(dbConfig)
+MexLogger.debug(dbConfig)
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: dbConfig.dbHost,
@@ -26,7 +27,7 @@ export const AppDataSource = new DataSource({
     database: dbConfig.dbDatabase,
     synchronize: false,
     logging: true,
-    entities: [dbConfig.dbEntities],
+    entities: ['src/api/models/**/*{js,ts}'],
     // subscribers: [],
     // migrations: [],
 })

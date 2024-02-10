@@ -4,7 +4,7 @@ import {
   JsonController,
   Post,
 } from 'routing-controllers';
-import { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
 
 import { LoginRequest } from '@base/api/requests/Auth/LoginRequest';
 import { LoginService } from '@base/api/services/Auth/LoginService';
@@ -17,7 +17,11 @@ import { OpenAPI } from 'routing-controllers-openapi';
 })
 @JsonController('/login')
 export class LoginController extends ControllerBase {
-  public constructor(private loginService: LoginService) {
+  
+  @Inject()
+  private loginService: LoginService;
+
+  public constructor() {
     super();
   }
 

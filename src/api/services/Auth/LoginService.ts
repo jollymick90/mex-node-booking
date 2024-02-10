@@ -1,4 +1,4 @@
-import Container, { Service } from 'typedi';
+import { Inject, Service } from 'typedi';
 
 import { InvalidCredentials } from '@api/exceptions/Auth/InvalidCredentials';
 import { UserRepository } from '@api/repositories/Users/UserRepository';
@@ -9,12 +9,16 @@ import { HashService } from '@base/infrastructure/services/hash/HashService';
 @Service()
 export class LoginService {
   
+  @Inject()
   private userRepository: UserRepository;
 
-  constructor(private authService: AuthService, private hashService: HashService) {
-    this.userRepository = Container.get(UserRepository);
+  @Inject()
+  private authService: AuthService;
 
-  }
+  @Inject()
+  private hashService: HashService;
+
+  constructor() { }
 
   public async login(data: LoginRequest) {
     let user = await this.userRepository.findOneByEmail(data.email);
@@ -31,10 +35,9 @@ export class LoginService {
       {
         userId: user.id,
         email: user.email,
-        role_id: user.roleId,
-        role: user.role.name,
+        role: user.role.code,
       },
-      { user: { id: user.id, email: user.email, role: user.role.name } },
+      { user: { id: user.id, email: user.email, role: user.role.code } },
     );
   }
 }

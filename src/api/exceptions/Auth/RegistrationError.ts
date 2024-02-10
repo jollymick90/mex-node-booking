@@ -1,7 +1,8 @@
 import { UnauthorizedError } from 'routing-controllers';
 
+const defaultMsg = 'Registration Error!';
 export class RegistrationError extends UnauthorizedError {
-  constructor() {
-    super('Registration Error!');
+  constructor(msg: string = defaultMsg) {
+    super(msg);
   }
 }

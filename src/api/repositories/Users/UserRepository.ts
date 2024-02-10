@@ -29,9 +29,16 @@ export class UserRepository extends RepositoryBase<User> {
   }
 
   public async findOneByEmail(email: string) {
-    return await this.repository.findOneBy({
-      email: email
-    })
+    return await this.repository.findOne({
+
+      relations: {
+        role: true
+      }, 
+      where: {
+        email: email
+      }
+    }
+    )
   }
 
   public async findById(id: number) {
