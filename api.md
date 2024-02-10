@@ -1,72 +1,158 @@
-# Context:
-/api/v1/takana/
-## Cliente
-### Login
+# Takana API
 
-Markup:
- - [ ] An uncompleted task
- - [x] A completed task
+<b>Context:</b>
+/api/v1/takana/
+
+## Cliente
+
+## Login
 
 Serve per fare la login
-/login
-POST
-private
+ - [x] A completed
 
-### Registrazione
+Path: /login
+
+Metodo: POST
+
+Accessibilità: private
+
+
+## Registrazione
 Serve per fare la registrazione
-/registration
-POST 
-private
+- [x] A completed
 
-### Cambio Password 
+Path: /registration
+
+Metodo: POST 
+
+Visibilità: private
+
+## Cambio Password 
+
 Serve per cambiare la password
-/passwordReset
-POST
-private
 
-### Dove ci trovi
+- [ ] A completed
+
+Path: /passwordReset
+
+Metodo: POST
+
+Visibilità: private
+
+## Dove ci trovi
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
 Serve per ottenere dove trovare i posti dove sono i track
-/whereNow
-GET
-public
+
+Path: /whereNow
+
+Metodo: GET
+
+Visibilità: public
 
 Serve per ottenere gli orari e i luoghi della settimana
-/whereWeek
-GET
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+Path: /whereWeek
+Metodo: GET
 public
 
-### Prodotto per categoria
-Serve per ottenere la lista dei prodotti
-/menu-items
-GET
+### Piatti e prodotti
+<b>Lista Piatti</b>
+
+Serve per ottenere la lista dei piatti e prodotti
+
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
+Path: /dishes
+
+Metodo: GET
+
 public
 
-#### Carrello
+## Carrello
+
 nel token ci sarà l'id dell'utente senza mettere l'id nel path delle api
 
-Serve per inviare l'ordine 
-/booking
-POST
-private
+<b>Nuovo Ordine</b>
 
-Serve per sapere lo stato dell'ordine
-/booking/{id}
-GET
-private
+Serve per inviare l'ordine 
+
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
+Path: /order
+
+Metodo: POST
+
+Visibilità: private
+
+<b>Dettaglio Ordine</b>
+
+Serve per sapere i dettagli dell'ordine e lo stato dell'ordine
+
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
+Path: /order/{id}
+
+Metodo: GET
+
+Visibilità: private
+
+<b>Lista Ordini</b>
 
 Serve per ottenere la lista degli ordini del giorno
-/booking
-GET
+
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
+Path: /order/all
+
+Metodo: GET
+
 private
 
-Serve per modificare l'ordine: usato per confermare il cambio orario
-/booking/{id}
-PUT
+<b>Modifica Ordine</b>
+
+Serve per modificare l'ordine non confermato
+
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
+Path: /order/draft/{id}
+
+Metodo: PUT
+
+private
+
+<b>Conferma Ordine</b>
+
+Serve per confermare l'ordine, dopo non si può più modificare
+
+- [ ] A completed
+    - [x] Controller
+    - [ ] Service
+
+Path: /order/send/{id}
+
+Metodo: PUT
+
 private
 
 
 ## Track
 ### Login
+- [ ] A completed
 Serve per fare la login
 /login
 POST
@@ -75,6 +161,7 @@ private
 la registrazione si può fare solo sulla dashboard di keycloak per motivi di sicurezza
 ### Cambio Password 
 Serve per cambiare la password
+- [ ] A completed
 /passwordReset
 POST
 private
@@ -83,16 +170,19 @@ private
 nel token ci sarà l'id dell'utente e una claim per sapere se è un utente di tipo track
 
 Serve per ottenere la lista di TUTTI gli ordini del giorno di quel track
+- [ ] A completed
 /{track-id}/booking
 GET
 private
 
 Serve per sapere lo stato dell'ordine
+- [ ] A completed
 /{track-id}/booking/{id}
 GET
 private
 
 Serve per modificare l'ordine: usato per confermare, rifiutare e posticipare
+- [ ] A completed
 /{track-id}/booking/{id}
 PUT
 private
