@@ -9,11 +9,12 @@ import { Service } from 'typedi';
 import { LoginRequest } from '@base/api/requests/Auth/LoginRequest';
 import { LoginService } from '@base/api/services/Auth/LoginService';
 import { ControllerBase } from '@base/infrastructure/abstracts/ControllerBase';
+import { OpenAPI } from 'routing-controllers-openapi';
 
 @Service()
-// @OpenAPI({
-//   tags: ['Auth'],
-// })
+@OpenAPI({
+  tags: ['Auth'],
+})
 @JsonController('/login')
 export class LoginController extends ControllerBase {
   public constructor(private loginService: LoginService) {

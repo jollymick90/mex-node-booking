@@ -1,15 +1,19 @@
 import 'module-alias/register';
 import 'reflect-metadata';
+import * as swaggerUiExpress from 'swagger-ui-express';
 import express from 'express';
 import {
   useContainer as routingControllersUseContainer,
   useExpressServer,
+  getMetadataArgsStorage
 } from 'routing-controllers';
 import Container from 'typedi';
 
 import { appConfig } from './config/app';
 import { AppDataSource } from './config/db';
 import { UserRepository } from './api/repositories/Users/UserRepository';
+import { routingControllersToSpec } from 'routing-controllers-openapi';
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 
 class App {
 private app: express.Application = express();
@@ -25,6 +29,7 @@ private app: express.Application = express();
     this.registerSocketControllers();
     this.registerDefaultHomePage();
     this.registerRoutingControllers();
+    this.setupSwagger();
 
   }
   private async typeOrmCreateConnection() {
@@ -73,6 +78,45 @@ private app: express.Application = express();
         date: new Date(),
       });
     });
+  }
+
+  private setupSwagger() {
+    // Parse class-validator classes into JSON Schema
+    const schemas = validationMetadatasToSchemas({
+      refPointerPrefix: '#/components/schemas/',
+    });
+
+    // Parse routing-controllers classes into OpenAPI spec:
+    const storage = getMetadataArgsStorage();
+    const spec = routingControllersToSpec(
+      storage,
+      { routePrefix: appConfig.routePrefix },
+      {
+        components: {
+          schemas,
+          securitySchemes: {
+            bearerAuth: {
+              type: 'http',
+              scheme: 'bearer',
+              bearerFormat: 'JWT',
+            },
+          },
+        },
+        info: {
+          description: 'Takana',
+          title: 'API Takana Documentation',
+          version: '0.0.1',
+          contact: {
+            name: 'Takana',
+            url: 'https://takana.it',
+            email: 'support@takana.it',
+          },
+        },
+      },
+    );
+
+    // Use Swagger
+    this.app.use('/docs', swaggerUiExpress.serve, swaggerUiExpress.setup(spec));
   }
 }
 

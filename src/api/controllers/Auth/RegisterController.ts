@@ -3,14 +3,15 @@ import { JsonController, Post, Body } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { RegisterRequest } from '@api/requests/Auth/RegisterRequest';
 import { RegisterService } from '@api/services/Auth/RegisterService';
+import { OpenAPI } from "routing-controllers-openapi";
 
 @Service()
-// @OpenAPI({
-//   tags: ['Auth'],
-// })
+@OpenAPI({
+  tags: ['Auth'],
+})
 @JsonController('/register')
 export class RegisterController extends ControllerBase {
-  
+
   @Inject()
   private registerService: RegisterService;
 
