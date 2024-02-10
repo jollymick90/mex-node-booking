@@ -8,6 +8,7 @@ import {
 import Container from 'typedi';
 
 import { appConfig } from './config/app';
+import { AppDataSource } from './config/db';
 
 class App {
 private app: express.Application = express();
@@ -17,12 +18,20 @@ private app: express.Application = express();
     
     this.bootstrap();
   }
-  bootstrap() {
+  async bootstrap() {
     this.useContainers();
+    await this.typeOrmCreateConnection();
     this.registerSocketControllers();
     this.registerDefaultHomePage();
     this.registerRoutingControllers();
 
+  }
+  private async typeOrmCreateConnection() {
+    try {
+      await AppDataSource.initialize();
+    } catch (error) {
+      console.log('Caught! Cannot connect to database: ', error);
+    }
   }
   private registerSocketControllers() {
     const server = require('http').Server(this.app);
@@ -49,6 +58,7 @@ private app: express.Application = express();
   }
   private useContainers() {
     routingControllersUseContainer(Container);
+    // typeormOrmUseContainer(containerTypeorm);
 
   }
   private registerDefaultHomePage() {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src\\main.ts",
+    "dev": "nodemon --exec ts-node src/main.ts",
+    "start-unix": "NODE_ENV=development nodemon --exec ts-node src/main.ts",
     "start": "set NODE_ENV=development && nodemon --exec ts-node src\\main.ts",
     "typeorm": "ts-node -r ./fix-module-alias.js typeorm",
     "build": "tsc"
@@ -39,7 +40,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.11.13",
+    "@types/node": "^20.11.17",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
