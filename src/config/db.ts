@@ -1,3 +1,5 @@
+import { Role } from '@base/entities/Role';
+import { User } from '@base/entities/User';
 import { env } from '@base/utils/env';
 import { DataSource } from 'typeorm';
 
@@ -21,9 +23,9 @@ export const AppDataSource = new DataSource({
     username: dbConfig.dbUsername,
     password: dbConfig.dbPassword,
     database: dbConfig.dbDatabase,
-    synchronize: true,
+    synchronize: false,
     logging: true,
-    entities: ['src/api/models/**/*.ts'],
+    entities: [User, Role],
     // subscribers: [],
     // migrations: [],
 })
