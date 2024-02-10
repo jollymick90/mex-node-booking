@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, BeforeInsert, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, BeforeInsert, BeforeUpdate, OneToMany, ManyToOne } from "typeorm";
 import { Exclude, Expose } from 'class-transformer';
-import { Role } from "./Role";
+import { Role } from "./Roles";
 import { HashService } from '@base/infrastructure/services/hash/HashService';
+import { Orders } from "./Orders";
 
 @Entity({ name: 'users' })
 export class User {
@@ -25,7 +26,7 @@ export class User {
     @Column({name: "role_id"})
     roleId: number;
 
-    @OneToOne(() => Role)
+    @ManyToOne(() => Role, role => role.users)
     @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
     role: Role;
 
@@ -35,6 +36,12 @@ export class User {
       if (this.password) this.password = await new HashService().make(this.password);
     }
   
+
+    @OneToMany(() => Orders, order => order.user)
+    orders: Orders[];
+  
+    // @OneToMany(() => UsersTrucks, userTruck => userTruck.user)
+    // userTrucks: UsersTrucks[];
     // @BeforeInsert()
     // async setDefaultRole() {
     //   const roleId = this.roleId ? this.roleId : 2;
