@@ -40,11 +40,13 @@ Metodo: POST
 Visibilità: private
 
 ## Dove ci trovi
+
+<b>Dove ci trovi oggi</b>
+
+Serve per ottenere i posti dove sono i track oggi
 - [ ] A completed
     - [x] Controller
-    - [ ] Service
-
-Serve per ottenere dove trovare i posti dove sono i track
+    - [x] Service
 
 Path: /whereNow
 
@@ -52,15 +54,18 @@ Metodo: GET
 
 Visibilità: public
 
+<b>Orari e luoghi del weekend</b>
+
 Serve per ottenere gli orari e i luoghi della settimana
 - [ ] A completed
     - [x] Controller
-    - [ ] Service
+    - [x] Service
 Path: /whereWeek
 Metodo: GET
 public
 
 ### Piatti e prodotti
+
 <b>Lista Piatti</b>
 
 Serve per ottenere la lista dei piatti e prodotti

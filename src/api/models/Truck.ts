@@ -17,7 +17,7 @@ export class Truck extends EntityBase {
   @Column()
   note: string;
 
-  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.trucks)
+  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.truck)
   truckCalendars: TruckCalendars[];
 
   // @OneToMany(() => UsersTrucks, userTruck => userTruck.truck)

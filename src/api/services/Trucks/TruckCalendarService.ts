@@ -36,4 +36,11 @@ export class TruckCalendarService {
 
         return truckCalendars.map(mapTruckCalendarToTruckDay);
     }
+    public async findWeek(): Promise<TruckDayResponseDTO[]> {
+
+        const truckCalendars: TruckCalendars[] = await this.truckCalendarRespository.findWeek();
+
+        return truckCalendars.map(mapTruckCalendarToTruckDay);
+    }
+    
 }

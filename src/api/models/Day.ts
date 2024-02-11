@@ -21,6 +21,6 @@ export class Day extends EntityBase {
   @Column({ name: 'custom_day'})
   customDay: Date;
 
-  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.trucks)
+  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.truck)
   truckCalendars: TruckCalendars[];
 }

@@ -24,6 +24,6 @@ export class WhereController extends ControllerBase {
 
   @Get("/week")
   public async getWhereWeek(): Promise<TruckDayResponseDTO[]> {
-    return [];
+    return this.truckCalendarService.findWeek();
   }
 }

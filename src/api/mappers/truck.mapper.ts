@@ -23,8 +23,8 @@ export function mapTruckCalendarToTruckDay(input: TruckCalendars): TruckDayRespo
     const response: TruckDayResponseDTO = {
         siteCode: input.site?.code || "",
         siteName: input.site?.name || "",
-        truckCode: input.trucks?.code || "",
-        truckName: input.trucks?.name || "",
+        truckCode: input.truck?.code || "",
+        truckName: input.truck?.name || "",
         startAt: input.start_at,
         endAt: input.end_at,
         ...getDayOfWeek(input.day)

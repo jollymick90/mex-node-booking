@@ -16,7 +16,7 @@ export class TruckCalendarRepository extends RepositoryBase<TruckCalendars>  imp
   public async findAllJoined() {
     return this.repository.find({
       relations: {
-        trucks: true,
+        truck: true,
         site: true,
         day: true
       }
@@ -26,15 +26,9 @@ export class TruckCalendarRepository extends RepositoryBase<TruckCalendars>  imp
   public async findNow() {
     const nowWeekDay = new Date().getDay();
     const today = new Date();
-    // const result = await this.repository
-    //   .createQueryBuilder("tc")
-    //   .where("tc.day.dayOfWeek = :day OR tc.day.customDay = CURRENT_DAY or tc.holiday = CURRENT_DAY")
-    //   .setParameter("day", nowWeekDay)
-    //   .getMany();
-    // console.log(result);
     return this.repository.find({
       relations: {
-        trucks: true,
+        truck: true,
         site: true,
         day: true
       },
@@ -58,6 +52,42 @@ export class TruckCalendarRepository extends RepositoryBase<TruckCalendars>  imp
     });
   }
 
+  public async findWeek() {
+    const nowWeekDay = new Date().getDay();
+    const [startDayWeek, endDayWeek] = this.getStartEndWeek();
 
+    return this.repository
+      .createQueryBuilder("tc")
+      .innerJoinAndSelect("tc.truck", "tr")
+      .innerJoinAndSelect("tc.site", "si")
+      .innerJoinAndSelect("tc.day", "d")
+      .where("d.dayOfWeek IS NOT NULL or d.customDay >= :low AND d.customDay <= :high or d.holiday >= :low AND d.holiday <= :high")
+      .setParameter("low", startDayWeek)
+      .setParameter("high", endDayWeek)
+      .getMany();
+
+  }
+   getWeek(date: Date) {
+    const d = new Date(date);
+  
+    const dayOfWeek = d.getDay();
+  
+    // Start day of week (monday)
+    const startWeek = new Date(d.getFullYear(), d.getMonth(), d.getDate() - dayOfWeek);
+  
+    // End day of week (sunday)
+    const endWeek = new Date(startWeek.getFullYear(), startWeek.getMonth(), startWeek.getDate() + 6);
+  
+    return {
+      start: startWeek,
+      end: endWeek,
+    };
+  }
+  getStartEndWeek(): [Date, Date] {
+    const result = this.getWeek(new Date())
+    return [result.start, result.end]
+  }
+
+  
 
 }

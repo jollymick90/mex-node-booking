@@ -17,6 +17,6 @@ export class Site extends EntityBase {
   @Column()
   address: string;
 
-  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.trucks)
+  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.truck)
   truckCalendars: TruckCalendars[];
 }

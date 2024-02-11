@@ -17,7 +17,7 @@ export class TruckCalendars extends EntityBase {
 
   @ManyToOne(() => Truck, truck => truck.truckCalendars)
   @JoinColumn({ name: 'truck_id' })
-  trucks: Truck;
+  truck: Truck;
 
 
   @ManyToOne(() => Day, day => day.truckCalendars)
