@@ -9,9 +9,7 @@ import { AppDataSource } from '@base/config/db';
 export class UserRepository extends RepositoryBase<User> {
 
   constructor() {
-    super();
-    this.repository = AppDataSource.getRepository(User);
-
+    super(AppDataSource.getRepository(User));
   }
 
   public async createUser(data: object) {

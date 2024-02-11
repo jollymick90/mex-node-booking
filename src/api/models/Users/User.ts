@@ -54,4 +54,11 @@ export class User extends EntityBase {
 
     this.roleId = roleId;
   }
+
+  // @OneToMany(() => Orders, order => order.user)
+  // orders: Orders[];
+
+  // @ManyToOne(() => Role, role => role.users)
+  // @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
+  // role: Role;
 }

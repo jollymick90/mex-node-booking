@@ -1,10 +1,9 @@
-// days.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
-import { Dish } from './Dishes';
+import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 @Entity({ name: 'categories' })
 @Unique(['code'])
-export class Category {
+export class Category extends EntityBase {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,6 +13,6 @@ export class Category {
   @Column()
   name: string;
 
-  @OneToMany(() => Dish, dish => dish.categories)
-  dishes: Dish[]
+  // @OneToMany(() => Dish, dish => dish.categories)
+  // dishes: Dish[]
 }

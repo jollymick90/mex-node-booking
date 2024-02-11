@@ -1,9 +1,9 @@
-// days.entity.ts
+import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 
 @Entity({ name: 'discounts' })
 @Unique(['code'])
-export class Discounts {
+export class Discounts extends EntityBase {
   @PrimaryGeneratedColumn()
   id: number;
 

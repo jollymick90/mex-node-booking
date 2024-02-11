@@ -1,4 +1,3 @@
-// days.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
 import { Orders } from './Orders';
 
@@ -14,7 +13,7 @@ export class StateOrder {
   @Column()
   name: string;
 
-  @OneToMany(() => Orders, orders => orders.stateOrder)
-  orders: Orders[]
+  // @OneToMany(() => Orders, orders => orders.stateOrder)
+  // orders: Orders[]
 
 }

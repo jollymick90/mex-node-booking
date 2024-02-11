@@ -1,4 +1,3 @@
-// orders-items.entity.ts
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
 import { Orders } from './Orders';
 import { Dish } from './Dishes';
@@ -10,9 +9,9 @@ export class DishTag {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Dish, dish => dish.t
-  dish: Dish;
+  // @ManyToOne(() => Dish, dish => dish.t
+  // dish: Dish;
 
-  @ManyToOne(() => Tags, tag => tag.)
-  tag: Tags;
+  // @ManyToOne(() => Tags, tag => tag.)
+  // tag: Tags;
 }

@@ -1,4 +1,3 @@
-// truck-calendars.entity.ts
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
 import { Truck } from './Trucks';
 import { Day } from './Day';
@@ -12,11 +11,11 @@ export class TruckCalendars {
   @ManyToOne(() => Truck, truck => truck.truckCalendars)
   truck: Truck;
 
-  @ManyToOne(() => Day, day => day.truckCalendars)
-  day: Day;
+  // @ManyToOne(() => Day, day => day.truckCalendars)
+  // day: Day;
 
-  @ManyToOne(() => Site, site => site.truckCalendars)
-  site: Site;
+  // @ManyToOne(() => Site, site => site.truckCalendars)
+  // site: Site;
 
   @Column({ nullable: true })
   start_at: string;

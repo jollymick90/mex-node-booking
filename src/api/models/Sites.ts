@@ -1,10 +1,11 @@
 // days.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
+import { Truck } from './Trucks';
 import { TruckCalendars } from './TruckCalendars';
 
-@Entity({ name: 'day' })
+@Entity({ name: 'sites' })
 @Unique(['code'])
-export class Day {
+export class Site {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,6 +15,9 @@ export class Day {
   @Column()
   name: string;
 
-  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.day)
-  truckCalendars: TruckCalendars[];
+  @Column()
+  address: string;
+
+  // @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.site)
+  // truckCalendars: TruckCalendars[];
 }

@@ -1,4 +1,3 @@
-// days.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
 import { Orders } from './Orders';
 import { TruckCalendars } from './TruckCalendars';
@@ -24,8 +23,8 @@ export class Truck {
   // @OneToMany(() => UsersTrucks, userTruck => userTruck.truck)
   // usersTrucks: UsersTrucks[];
 
-  @OneToMany(() => Orders, order => order.truck)
-  orders: Orders[];
+  // @OneToMany(() => Orders, order => order.truck)
+  // orders: Orders[];
 
   
   

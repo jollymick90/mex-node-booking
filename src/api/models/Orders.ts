@@ -1,7 +1,6 @@
 // orders.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Truck } from './Trucks';
-import { User } from './User';
 import { StateOrder } from './StateOrder';
 import { OrdersItems } from './OrderItems';
 
@@ -17,15 +16,15 @@ export class Orders {
   @UpdateDateColumn()
   modify_at: Date;
 
-  @ManyToOne(() => User, user => user.orders)
-  user: User;
+  // @ManyToOne(() => User, user => user.orders)
+  // user: User;
 
-  @ManyToOne(() => Truck, truck => truck.orders)
-  truck: Truck;
+  // @ManyToOne(() => Truck, truck => truck.orders)
+  // truck: Truck;
 
-  @ManyToOne(() => StateOrder, stateOrder => stateOrder.orders)
-  stateOrder: StateOrder;
+  // @ManyToOne(() => StateOrder, stateOrder => stateOrder.orders)
+  // stateOrder: StateOrder;
 
-  @OneToMany(() => OrdersItems, ordersItem => ordersItem.order)
-  ordersItems: OrdersItems[];
+  // @OneToMany(() => OrdersItems, ordersItem => ordersItem.order)
+  // ordersItems: OrdersItems[];
 }

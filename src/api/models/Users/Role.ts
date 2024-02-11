@@ -15,4 +15,8 @@ export class Role extends EntityBase {
   name: string;
   @Column()
   code: string;
+
+  // @OneToMany(() => User, user => user.role)
+  // users: User[];
+
 }

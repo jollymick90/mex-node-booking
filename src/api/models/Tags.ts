@@ -1,4 +1,3 @@
-// days.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 
 @Entity({ name: 'tags' })
