@@ -1,14 +1,14 @@
 import { Service } from 'typedi';
 import { RepositoryBase } from '@base/infrastructure/abstracts/RepositoryBase';
 import { AppDataSource } from '@base/config/db';
-import { Category } from '@base/api/models/Category';
 import { IRepository } from '@base/infrastructure/abstracts/IRepository';
+import { Truck } from '@base/api/models/Truck';
 
 @Service()
-export class CategoryRepository extends RepositoryBase<Category>  implements IRepository<Category>{
+export class TruckRepository extends RepositoryBase<Truck>  implements IRepository<Truck>{
 
   constructor() {
-    super(AppDataSource.getRepository(Category));
+    super(AppDataSource.getRepository(Truck));
   }
 
 }

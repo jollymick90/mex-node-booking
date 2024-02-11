@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
-import { Orders } from './Orders';
+import { Orders } from './Order';
 
 @Entity({ name: 'state_orders' })
 @Unique(['code'])

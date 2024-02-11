@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { OrdersItems } from './OrderItems';
 import { DishTag } from './DishTags';
-import { DishCategory } from './DishesCategories';
+import { DishCategory } from './DishCategories';
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 @Entity({ name: 'dishes' })

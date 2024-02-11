@@ -1,10 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
-import { Orders } from './Orders';
 import { TruckCalendars } from './TruckCalendars';
+import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 @Entity({ name: 'trucks' })
 @Unique(['code'])
-export class Truck {
+export class Truck extends EntityBase {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,8 +17,8 @@ export class Truck {
   @Column()
   note: string;
 
-  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.truck)
-  truckCalendars: TruckCalendars[];
+  // @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.truck)
+  // truckCalendars: TruckCalendars[];
 
   // @OneToMany(() => UsersTrucks, userTruck => userTruck.truck)
   // usersTrucks: UsersTrucks[];

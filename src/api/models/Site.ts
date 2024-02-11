@@ -1,6 +1,6 @@
 // days.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
-import { Truck } from './Trucks';
+import { Truck } from './Truck';
 import { TruckCalendars } from './TruckCalendars';
 
 @Entity({ name: 'sites' })

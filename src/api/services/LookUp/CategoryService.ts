@@ -1,4 +1,4 @@
-import Container, { Inject, Service } from 'typedi';
+import { Container, Service } from 'typedi';
 
 import { CategoryRepository } from '@base/api/repositories/LookUp/CategoryRepository';
 import { ServiceBase } from '@base/infrastructure/abstracts/ServiceBase';

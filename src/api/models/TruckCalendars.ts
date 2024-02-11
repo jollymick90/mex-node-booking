@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
-import { Truck } from './Trucks';
+import { Truck } from './Truck';
 import { Day } from './Day';
-import { Site } from './Sites';
+import { Site } from './Site';
 
 @Entity()
 export class TruckCalendars {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Truck, truck => truck.truckCalendars)
-  truck: Truck;
+  // @ManyToOne(() => Truck, truck => truck.truckCalendars)
+  // truck: Truck;
 
   // @ManyToOne(() => Day, day => day.truckCalendars)
   // day: Day;

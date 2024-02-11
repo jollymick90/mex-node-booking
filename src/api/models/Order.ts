@@ -1,6 +1,6 @@
 // orders.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
-import { Truck } from './Trucks';
+import { Truck } from './Truck';
 import { StateOrder } from './StateOrder';
 import { OrdersItems } from './OrderItems';
 
