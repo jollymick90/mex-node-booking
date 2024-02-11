@@ -1,7 +1,7 @@
-import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
-import { JsonController, Get, Param, Post, Body } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { OpenAPI } from "routing-controllers-openapi";
+import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
+import { JsonController, Get, Param, Post, Body } from "routing-controllers";
 import { DishService } from "@base/api/services/Orders/DishService";
 import { Dish } from "@base/api/models/Dish";
 

@@ -1,11 +1,9 @@
-// days.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
-import { Truck } from './Truck';
-import { TruckCalendars } from './TruckCalendars';
+import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
+import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
 @Entity({ name: 'sites' })
 @Unique(['code'])
-export class Site {
+export class Site extends EntityBase {
   @PrimaryGeneratedColumn()
   id: number;
 

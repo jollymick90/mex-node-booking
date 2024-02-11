@@ -1,6 +1,6 @@
-import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
-import { JsonController, Get } from "routing-controllers";
 import { Inject, Service } from "typedi";
+import { JsonController, Get } from "routing-controllers";
+import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { RegisterService } from '@api/services/Auth/RegisterService';
 import { OpenAPI } from "routing-controllers-openapi";
 
