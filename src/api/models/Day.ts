@@ -1,11 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
+import { Entity, Column, Unique, OneToMany } from 'typeorm';
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
+import { TruckCalendars } from '@api/models/TruckCalendars';
 
-@Entity({ name: 'day' })
+@Entity({ name: 'days' })
 @Unique(['code'])
 export class Day extends EntityBase {
-  // @PrimaryGeneratedColumn()
-  // id: number;
 
   @Column()
   code: string;
@@ -13,6 +12,15 @@ export class Day extends EntityBase {
   @Column()
   name: string;
 
-  // @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.day)
-  // truckCalendars: TruckCalendars[];
+  @Column({ name: 'day_of_week'})
+  dayOfWeek: number;
+
+  @Column({ name: 'holiday'})
+  holiday: Date;
+
+  @Column({ name: 'custom_day'})
+  customDay: Date;
+
+  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.trucks)
+  truckCalendars: TruckCalendars[];
 }

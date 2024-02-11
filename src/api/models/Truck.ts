@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany, ManyToOne } from 'typeorm';
 import { TruckCalendars } from './TruckCalendars';
 import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
 
@@ -17,8 +17,8 @@ export class Truck extends EntityBase {
   @Column()
   note: string;
 
-  // @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.truck)
-  // truckCalendars: TruckCalendars[];
+  @OneToMany(() => TruckCalendars, truckCalendar => truckCalendar.trucks)
+  truckCalendars: TruckCalendars[];
 
   // @OneToMany(() => UsersTrucks, userTruck => userTruck.truck)
   // usersTrucks: UsersTrucks[];

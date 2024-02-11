@@ -27,7 +27,18 @@ CREATE TABLE if not exists days
 );
 ALTER TABLE takana.days ADD code varchar NOT NULL;
 ALTER TABLE takana.days ADD "name" varchar NULL;
+ALTER TABLE takana.days ADD COLUMN day_of_week smallint CHECK (day_of_week BETWEEN 0 AND 6) NULL;
+ALTER TABLE takana.days ADD holiday date NULL;
+ALTER TABLE takana.days ADD custom_day date NULL;
 ALTER TABLE takana.days ADD CONSTRAINT code_days_un UNIQUE (code);
+ALTER TABLE takana.days
+ADD CONSTRAINT only_one_field_not_null
+CHECK (
+    (day_of_week IS NULL AND holiday IS NULL AND custom_day IS NULL) OR
+    (day_of_week IS NOT NULL AND holiday IS NULL AND custom_day IS NULL) OR
+    (day_of_week IS NULL AND holiday IS NOT NULL AND custom_day IS NULL) OR
+    (day_of_week IS NULL AND holiday IS NULL AND custom_day IS NOT NULL)
+);
 
 -- Tag for dishes or other
 CREATE TABLE if not exists tags 

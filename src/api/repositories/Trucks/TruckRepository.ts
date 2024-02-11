@@ -5,10 +5,12 @@ import { IRepository } from '@base/infrastructure/abstracts/IRepository';
 import { Truck } from '@base/api/models/Truck';
 
 @Service()
-export class TruckRepository extends RepositoryBase<Truck>  implements IRepository<Truck>{
+export class TruckRepository extends RepositoryBase<Truck> implements IRepository<Truck>{
 
   constructor() {
     super(AppDataSource.getRepository(Truck));
   }
+
+
 
 }
