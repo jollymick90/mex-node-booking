@@ -4,6 +4,7 @@ import { ControllerBase } from "@base/infrastructure/abstracts/ControllerBase";
 import { JsonController, Get, Param, Post, Body } from "routing-controllers";
 import { DishService } from "@base/api/services/Orders/DishService";
 import { Dish } from "@base/api/models/Dish";
+import { DishDTO } from "@base/api/responses/Orders/order.interface";
 
 @Service()
 @OpenAPI({})
@@ -18,8 +19,8 @@ export class DishController extends ControllerBase {
   }
 
   @Get()
-  async findAll(): Promise<Dish[]> {
-    return await this.service.findAll();
+  async findAll(): Promise<DishDTO[]> {
+    return await this.service.findAllDTO();
   }
   @Get('/:id')
   async findById(@Param('id') id: number): Promise<Dish | null> {

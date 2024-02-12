@@ -1,18 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
-import { EntityBase } from '@base/infrastructure/abstracts/EntityBase';
+import { Entity, Column, Unique, OneToMany } from 'typeorm';
 import { TruckCalendars } from './TruckCalendars';
+import { LookUpEntityBase } from '@base/infrastructure/abstracts/LookUpEntityBase';
 
 @Entity({ name: 'sites' })
 @Unique(['code'])
-export class Site extends EntityBase {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  code: string;
-
-  @Column()
-  name: string;
+export class Site extends LookUpEntityBase {
 
   @Column()
   address: string;

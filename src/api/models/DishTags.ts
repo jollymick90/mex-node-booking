@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
 import { Orders } from './Order';
 import { Dish } from './Dish';
-import { Tags } from './Tag';
+import { Tag } from './Tag';
 
 
 @Entity({ name: 'dishes_tags' })

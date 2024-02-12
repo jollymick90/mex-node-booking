@@ -1,14 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
+import { LookUpEntityBase } from '@base/infrastructure/abstracts/LookUpEntityBase';
+import { Entity, Unique } from 'typeorm';
 
 @Entity({ name: 'tags' })
 @Unique(['code'])
-export class Tags {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Tag extends LookUpEntityBase {
 
-  @Column()
-  code: string;
-
-  @Column()
-  name: string;
 }

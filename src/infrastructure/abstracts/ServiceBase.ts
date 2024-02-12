@@ -3,8 +3,8 @@ import { IRepository } from "./IRepository";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 
 
-export abstract class ServiceBase<T extends BaseEntity> {
-  constructor(private readonly repository: IRepository<T>) {}
+export abstract class ServiceBase<T extends BaseEntity, Repo extends IRepository<T> = IRepository<T>> {
+  constructor(public readonly repository: Repo) {}
 
   async findAll(): Promise<T[]> {
     return this.repository.findAll();
